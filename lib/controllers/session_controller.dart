@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:agora_rtm/agora_rtm.dart';
+// import 'package:agora_rtm/agora_rtm.dart';
 import 'package:agora_uikit/controllers/rtc_event_handlers.dart';
 import 'package:agora_uikit/controllers/rtc_token_handler.dart';
 import 'package:agora_uikit/controllers/rtm_client_event_handler.dart';
@@ -26,9 +26,9 @@ class SessionController extends ValueNotifier<AgoraSettings> {
   SessionController()
       : super(
           AgoraSettings(
-            engine: createAgoraRtcEngine(),
-            agoraRtmChannel: null,
-            agoraRtmClient: null,
+            engine: createAgoraRtcEngineEx(),
+            // agoraRtmChannel: null,
+            // agoraRtmClient: null,
             users: [],
             mainAgoraUser: AgoraUser(
               uid: 0,
@@ -54,19 +54,25 @@ class SessionController extends ValueNotifier<AgoraSettings> {
         );
 
   /// Function to initialize the Agora RTM client.
-  Future<void> initializeRtm(
-      AgoraRtmClientEventHandler agoraRtmClientEventHandler) async {
-    value = value.copyWith(
-      agoraRtmClient: await AgoraRtmClient.createInstance(
-        value.connectionData!.appId,
-      ),
-    );
-    if (value.agoraRtmClient != null) {
-      addListener(() {
-        createRtmClientEvents(agoraRtmClientEventHandler);
-      });
-    }
-  }
+  // Future<void> initializeRtm(
+  //     AgoraRtmClientEventHandler agoraRtmClientEventHandler) async {
+  //   value = value.copyWith(
+  //     agoraRtmClient: await AgoraRtmClient.createInstance(
+  //       value.connectionData!.appId,
+  //     ),
+  //   );
+  //   if (value.agoraRtmClient != null) {
+  //     addListener(() {
+  //       createRtmClientEvents(agoraRtmClientEventHandler);
+  //     });
+  //   }
+  // }
+
+  bool isScreenShared = false;
+  bool isJoined = false;
+  late final RtcEngineEventHandler _rtcEngineEventHandler;
+
+
 
   /// Function to initialize the Agora RTC engine.
   Future<void> initializeEngine(
@@ -78,7 +84,7 @@ class SessionController extends ValueNotifier<AgoraSettings> {
     log("SDK initialized: ${value.engine}", level: Level.error.value);
     // Getting SDK versions and assigning them
     SDKBuildInfo? rtcVersion = await value.engine?.getVersion();
-    AgoraVersions.staticRTM = await AgoraRtmClient.getSdkVersion();
+    // AgoraVersions.staticRTM = await AgoraRtmClient.getSdkVersion();
     if (rtcVersion?.version.toString() != null) {
       AgoraVersions.staticRTC = rtcVersion!.version.toString();
     }
@@ -90,26 +96,27 @@ class SessionController extends ValueNotifier<AgoraSettings> {
 
   /// Function to trigger all the AgoraRtcEventHandlers.
   void createEvents(
-    AgoraRtmChannelEventHandler agoraRtmChannelEventHandler,
+    // AgoraRtmChannelEventHandler agoraRtmChannelEventHandler,
     AgoraRtcEventHandlers agoraEventHandlers,
   ) async {
     value.engine?.registerEventHandler(
       await rtcEngineEventHandler(
         agoraEventHandlers,
-        agoraRtmChannelEventHandler,
+        // agoraRtmChannelEventHandler,
+        // agoraRtmChannelEventHandler,
         this,
       ),
     );
   }
 
-  void createRtmClientEvents(
-      AgoraRtmClientEventHandler agoraRtmClientEventHandler) {
-    rtmClientEventHandler(
-      agoraRtmClient: value.agoraRtmClient!,
-      agoraRtmClientEventHandler: agoraRtmClientEventHandler,
-      sessionController: this,
-    );
-  }
+  // void createRtmClientEvents(
+  //     AgoraRtmClientEventHandler agoraRtmClientEventHandler) {
+  //   rtmClientEventHandler(
+  //     agoraRtmClient: value.agoraRtmClient!,
+  //     agoraRtmClientEventHandler: agoraRtmClientEventHandler,
+  //     sessionController: this,
+  //   );
+  // }
 
   /// Function to set all the channel properties.
   void setChannelProperties(AgoraChannelData agoraChannelData) async {

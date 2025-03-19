@@ -11,7 +11,7 @@ import 'package:agora_uikit/src/enums.dart';
 
 Future<RtcEngineEventHandler> rtcEngineEventHandler(
   AgoraRtcEventHandlers agoraEventHandlers,
-  AgoraRtmChannelEventHandler agoraRtmChannelEventHandler,
+  // AgoraRtmChannelEventHandler agoraRtmChannelEventHandler,
   SessionController sessionController,
 ) async {
   const String tag = "AgoraVideoUIKit";
@@ -61,8 +61,8 @@ Future<RtcEngineEventHandler> rtcEngineEventHandler(
   }, onFirstLocalVideoFrame: (source, width, height, elapsed) {
     agoraEventHandlers.onFirstLocalVideoFrame
         ?.call(source, width, height, elapsed);
-  }, onFirstLocalVideoFramePublished: (source, elapsed) {
-    agoraEventHandlers.onFirstLocalVideoFramePublished?.call(source, elapsed);
+  }, onFirstLocalVideoFramePublished: (connection, elapsed) {
+    agoraEventHandlers.onFirstLocalVideoFramePublished?.call(connection, elapsed);
   }, onFirstRemoteAudioDecoded: (connection, uid, elapsed) {
     agoraEventHandlers.onFirstRemoteAudioDecoded
         ?.call(connection, uid, elapsed);
@@ -116,8 +116,8 @@ Future<RtcEngineEventHandler> rtcEngineEventHandler(
     agoraEventHandlers.onLastmileQuality?.call(quality);
   }, onLastmileProbeResult: (result) {
     agoraEventHandlers.onLastmileProbeResult?.call(result);
-  }, onLocalVideoStats: (source, stats) {
-    agoraEventHandlers.onLocalVideoStats?.call(source, stats);
+  }, onLocalVideoStats: (connection, stats) {
+    agoraEventHandlers.onLocalVideoStats?.call(connection, stats);
   }, onLocalAudioStats: (connection, stats) {
     agoraEventHandlers.onLocalAudioStats?.call(connection, stats);
   }, onRemoteVideoStats: (connection, stats) {
@@ -176,9 +176,9 @@ Future<RtcEngineEventHandler> rtcEngineEventHandler(
     sessionController.value =
         sessionController.value.copyWith(localUid: connection.localUid);
 
-    await rtmMethods(
-        agoraRtmChannelEventHandler: agoraRtmChannelEventHandler,
-        sessionController: sessionController);
+    // await rtmMethods(
+    //     agoraRtmChannelEventHandler: agoraRtmChannelEventHandler,
+    //     sessionController: sessionController);
 
     sessionController.value = sessionController.value.copyWith(
       mainAgoraUser: AgoraUser(
@@ -302,7 +302,8 @@ Future<RtcEngineEventHandler> rtcEngineEventHandler(
     agoraEventHandlers.onCameraReady?.call();
   }, onEncryptionError: (connection, errorType) {
     agoraEventHandlers.onEncryptionError?.call(connection, errorType);
-  }, onExtensionError: (provider, extension, error, message) {
+  },
+    /*  onExtensionError: (provider, extension, error, message) {
     agoraEventHandlers.onExtensionError
         ?.call(provider, extension, error, message);
   }, onExtensionEvent: (provider, extension, key, value) {
@@ -311,7 +312,8 @@ Future<RtcEngineEventHandler> rtcEngineEventHandler(
     agoraEventHandlers.onExtensionStarted?.call(provider, extension);
   }, onExtensionStopped: (provider, extension) {
     agoraEventHandlers.onExtensionStopped?.call(provider, extension);
-  }, onIntraRequestReceived: (connection) {
+  },*/
+      onIntraRequestReceived: (connection) {
     agoraEventHandlers.onIntraRequestReceived?.call(connection);
   }, onPermissionError: (permissionType) {
     agoraEventHandlers.onPermissionError?.call(permissionType);

@@ -1,14 +1,13 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:agora_rtm/agora_rtm.dart';
 import 'package:agora_uikit/models/agora_connection_data.dart';
 import 'package:agora_uikit/src/enums.dart';
 
 import 'agora_user.dart';
 
 class AgoraSettings {
-  final RtcEngine? engine;
-  final AgoraRtmChannel? agoraRtmChannel;
-  final AgoraRtmClient? agoraRtmClient;
+  late final RtcEngine? engine;
+  // final AgoraRtmChannel? agoraRtmChannel;
+  // final AgoraRtmClient? agoraRtmClient;
   final AgoraConnectionData? connectionData;
   final List<AgoraUser> users;
   final AgoraUser mainAgoraUser;
@@ -40,8 +39,8 @@ class AgoraSettings {
 
   AgoraSettings({
     this.engine,
-    this.agoraRtmChannel,
-    this.agoraRtmClient,
+    // this.agoraRtmChannel,
+    // this.agoraRtmClient,
     this.connectionData,
     required this.users,
     required this.mainAgoraUser,
@@ -74,8 +73,8 @@ class AgoraSettings {
 
   AgoraSettings copyWith({
     RtcEngine? engine,
-    AgoraRtmChannel? agoraRtmChannel,
-    AgoraRtmClient? agoraRtmClient,
+    // AgoraRtmChannel? agoraRtmChannel,
+    // AgoraRtmClient? agoraRtmClient,
     AgoraConnectionData? connectionData,
     List<AgoraUser>? users,
     AgoraUser? mainAgoraUser,
@@ -107,8 +106,8 @@ class AgoraSettings {
   }) {
     return AgoraSettings(
       engine: engine ?? this.engine,
-      agoraRtmChannel: agoraRtmChannel ?? this.agoraRtmChannel,
-      agoraRtmClient: agoraRtmClient ?? this.agoraRtmClient,
+      // agoraRtmChannel: agoraRtmChannel ?? this.agoraRtmChannel,
+      // agoraRtmClient: agoraRtmClient ?? this.agoraRtmClient,
       connectionData: connectionData ?? this.connectionData,
       users: users ?? this.users,
       mainAgoraUser: mainAgoraUser ?? this.mainAgoraUser,

@@ -1,4 +1,4 @@
-import 'package:agora_rtm/agora_rtm.dart';
+/* import 'package:agora_rtm/agora_rtm.dart';
 
 /// Handles all the callbacks or event handler for the Agora RTM client class
 class AgoraRtmClientEventHandler {
@@ -30,3 +30,4 @@ class AgoraRtmClientEventHandler {
     this.onPeersOnlineStatusChanged,
   });
 }
+*/

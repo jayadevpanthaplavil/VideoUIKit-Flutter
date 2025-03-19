@@ -1,3 +1,4 @@
+/*
 import 'package:agora_rtm/agora_rtm.dart';
 
 class AgoraRtmChannelEventHandler {
@@ -29,3 +30,4 @@ class AgoraRtmChannelEventHandler {
     this.onMemberCountUpdated,
   });
 }
+*/

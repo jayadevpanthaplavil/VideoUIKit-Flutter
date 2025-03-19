@@ -50,10 +50,10 @@ Future<void> endCall({required SessionController sessionController}) async {
   }
   await sessionController.value.engine?.stopPreview();
   await sessionController.value.engine?.leaveChannel();
-  if (sessionController.value.connectionData!.rtmEnabled) {
-    await sessionController.value.agoraRtmChannel?.leave();
-    await sessionController.value.agoraRtmClient?.logout();
-  }
+  // if (sessionController.value.connectionData!.rtmEnabled) {
+  //   await sessionController.value.agoraRtmChannel?.leave();
+  //   await sessionController.value.agoraRtmClient?.logout();
+  // }
   await sessionController.value.engine?.release();
 }
 
